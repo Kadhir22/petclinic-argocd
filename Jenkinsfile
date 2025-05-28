@@ -15,7 +15,7 @@ pipeline {
 
         stage('Containerization frontend') {
             steps {
-                cd /home/jenkins/workspace/petclinic-spring-petclinic-angular
+                sh 'cd /home/jenkins/workspace/petclinic-spring-petclinic-angular'
                 withCredentials([usernamePassword(
                     credentialsId: 'dochub-cred',
                     usernameVariable: 'DOCKER_USER',
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Containerization backend') {
             steps {
-                    cd /home/jenkins/workspace/spring-petclinic-rest
+                    sh 'cd /home/jenkins/workspace/spring-petclinic-rest'
                     sh 'docker build -t backend:4 .'
                     sh 'docker tag backend:4 kadhir22/petclinic-minikube:4'
                     sh 'docker push kadhir22/petclinic-minikube:4'
