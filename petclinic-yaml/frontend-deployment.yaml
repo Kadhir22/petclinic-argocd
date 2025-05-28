@@ -18,7 +18,7 @@ spec:
         image: kadhir22/angular-petclinic:3
         env:
         - name: API_URL
-          value: "http://192.168.49.2:32638/petclinic/api/"
+          value: "http://103.176.85.60:32638/petclinic/api/"
         ports:
         - containerPort: 8080
 
