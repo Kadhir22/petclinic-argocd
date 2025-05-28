@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: angular-frontend
-        image: kadhir22/angular-petclinic:3
+        image: kadhir22/angular-petclinic:4
         env:
         - name: API_URL
           value: "http://103.176.85.60:32638/petclinic/api/"
