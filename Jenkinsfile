@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('Cleanup Workspace') {
+        stage('Cleanup Workspace frontend') {
             steps {
                 cleanWs()
             }
@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('Cleanup Workspace') {
+        stage('Cleanup Workspace backend') {
             steps {
                 cleanWs()
             }
