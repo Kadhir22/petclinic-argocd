@@ -44,12 +44,12 @@ pipeline {
 
         stage('Containerization backend') {
             steps {
-                dir('spring-petclinic-rest') {
+                
                     sh 'docker build -t backend:4 .'
                     sh 'docker tag backend:4 kadhir22/petclinic-minikube:4'
                     sh 'docker push kadhir22/petclinic-minikube:4'
                     sh 'docker rmi kadhir22/petclinic-minikube:4'
-                }
+                
             }
         }
 
