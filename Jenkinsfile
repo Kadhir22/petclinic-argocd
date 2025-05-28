@@ -10,14 +10,6 @@ pipeline {
             }
         }
 
-        stage('Cloning backend') {
-            steps {
-                dir('spring-petclinic-rest') {
-                    git branch: 'master', credentialsId: 'githu-cred', url: 'https://github.com/Kadhir22/spring-petclinic-rest.git'
-                }
-            }
-        }
-
         stage('Containerization frontend') {
             steps {
                 dir('petclinic-spring-petclinic-angular') {
@@ -42,14 +34,29 @@ pipeline {
             }
         }
 
+        stage('Cloning backend') {
+            steps {
+                dir('spring-petclinic-rest') {
+                    git branch: 'master', credentialsId: 'githu-cred', url: 'https://github.com/Kadhir22/spring-petclinic-rest.git'
+                }
+            }
+        }
+
         stage('Containerization backend') {
             steps {
-                
-                    sh 'docker build -t backend:4 .'
-                    sh 'docker tag backend:4 kadhir22/petclinic-minikube:4'
-                    sh 'docker push kadhir22/petclinic-minikube:4'
-                    sh 'docker rmi kadhir22/petclinic-minikube:4'
-                
+                dir('spring-petclinic-rest') {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dochub-cred',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        sh 'docker build -t backend:4 .'
+                        sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                        sh 'docker tag backend:4 kadhir22/petclinic-minikube:4'
+                        sh 'docker push kadhir22/petclinic-minikube:4'
+                        sh 'docker rmi kadhir22/petclinic-minikube:4'
+                    }
+                }
             }
         }
 
