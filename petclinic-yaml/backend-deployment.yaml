@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: kadhir22/petclinic-minikube:theone
+          image: kadhir22/petclinic-minikube:3
           ports:
             - containerPort: 9966
 ---
