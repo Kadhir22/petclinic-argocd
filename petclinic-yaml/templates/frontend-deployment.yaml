@@ -20,3 +20,10 @@ spec:
               value: {{ .Values.frontend.env.API_URL | quote }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
+          volumeMounts:
+            - name: local-persistent-storage
+              mountPath: "/"
+      volumes:
+        - name: local-persistent-storage
+          persistentVolumeClaim:
+            claimName: ui-pvc
