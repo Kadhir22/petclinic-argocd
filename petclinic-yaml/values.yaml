@@ -1,0 +1,21 @@
+frontend:
+  image: kadhir22/angular-petclinic:working
+  replicas: 1
+  containerPort: 8080
+  env:
+    API_URL: "http:/localhost/petclinic/"
+  service:
+    type: NodePort
+    port: 80
+    targetPort: 8080
+    nodePort: 30089
+
+backend:
+  image: kadhir22/petclinic-minikube:theone
+  replicas: 1
+  containerPort: 9966
+  service:
+    type: NodePort
+    port: 8080
+    targetPort: 9966
+    nodePort: 32638
