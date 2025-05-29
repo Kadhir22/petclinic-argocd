@@ -17,3 +17,11 @@ spec:
           image: {{ .Values.backend.image }}
           ports:
             - containerPort: {{ .Values.backend.containerPort }}
+          volumeMounts:
+            - name: local-persistent-storage
+              mountPath: "/app"
+      volumes:
+        - name: local-persistent-storage
+          persistentVolumeClaim:
+            claimName: pet-pvc
+
